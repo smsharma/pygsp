@@ -113,6 +113,10 @@ class SphereHealpix(NNGraph):
                 raise ValueError('No optimal kernel width for {} neighbors and'
                                  ' {} subdivisions.'.format(k, subdivisions))
 
+        # If fewer pixels than neighbours, set neighbours to n_pixels - 1
+        if len(indexes) <= k:
+            k = len(indexes) - 1
+
         super(SphereHealpix, self).__init__(coords, k=k,
                                             kernel_width=kernel_width,
                                             **kwargs)
